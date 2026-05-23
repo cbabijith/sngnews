@@ -51,6 +51,7 @@ export class NewsService {
     imageUrl?: string | null,
     youtubeLink?: string | null,
     categoryId?: string | null,
+    subcategoryId?: string | null,
     isPublished?: boolean
   ): Promise<ApiResponse<News>> {
     const updates: Partial<News> = {}
@@ -61,6 +62,7 @@ export class NewsService {
     if (imageUrl !== undefined) updates.image_url = imageUrl
     if (youtubeLink !== undefined) updates.youtube_link = youtubeLink
     if (categoryId !== undefined) updates.category_id = categoryId
+    if (subcategoryId !== undefined) updates.subcategory_id = subcategoryId
     if (isPublished !== undefined) {
       updates.is_published = isPublished
       updates.published_at = isPublished ? new Date().toISOString() : null
