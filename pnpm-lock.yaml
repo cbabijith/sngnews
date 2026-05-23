@@ -149,6 +149,9 @@ importers:
         specifier: ^2.39.7
         version: 2.106.1
     devDependencies:
+      '@types/node':
+        specifier: ^20.19.41
+        version: 20.19.41
       typescript:
         specifier: ^5.3.3
         version: 5.9.3
@@ -525,6 +528,7 @@ packages:
 
   /@floating-ui/core@1.7.5:
     resolution: {integrity: sha512-1Ih4WTWyw0+lKyFMcBHGbb5U5FtuHJuujoyyr5zTaWS5EYMeT6Jb2AuDeftsCsEuchO+mM2ij5+q9crhydzLhQ==}
+    requiresBuild: true
     dependencies:
       '@floating-ui/utils': 0.2.11
     dev: false
@@ -549,6 +553,7 @@ packages:
 
   /@floating-ui/utils@0.2.11:
     resolution: {integrity: sha512-RiB/yIh78pcIxl6lLMG0CgBXAZ2Y0eVHqMPYugu+9U0AeT6YBeiJpf7lbdJNIugFP5SIjwNRgo4DhR1Qxi26Gg==}
+    requiresBuild: true
     dev: false
 
   /@hono/node-server@1.19.14(hono@4.12.22):
