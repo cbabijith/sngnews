@@ -4,8 +4,10 @@ import { useEffect, useState } from 'react'
 import { newsService, categoryService } from '@/services'
 import { profileRepository } from '@/repositories'
 import { DashboardStats } from './DashboardStats'
+import { useThemeStore } from '@/store/themeStore'
 
 export function Dashboard() {
+  const { colors } = useThemeStore()
   const [stats, setStats] = useState({
     totalNews: 0,
     totalStaff: 0,
@@ -43,7 +45,7 @@ export function Dashboard() {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="text-gray-600">Loading dashboard...</div>
+        <div className={colors.textSecondary}>Loading dashboard...</div>
       </div>
     )
   }
@@ -51,8 +53,8 @@ export function Dashboard() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold text-gray-900">Dashboard</h1>
-        <p className="text-gray-600 mt-1">Overview of your news platform</p>
+        <h1 className={`text-3xl font-bold ${colors.text}`}>Dashboard</h1>
+        <p className={`${colors.textSecondary} mt-1`}>Overview of your news platform</p>
       </div>
 
       <DashboardStats
@@ -63,12 +65,12 @@ export function Dashboard() {
       />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-4">Recent Activity</h2>
-          <p className="text-gray-600">No recent activity to display</p>
+        <div className={`${colors.card} p-6 rounded-lg shadow`}>
+          <h2 className={`text-xl font-semibold mb-4 ${colors.text}`}>Recent Activity</h2>
+          <p className={colors.textSecondary}>No recent activity to display</p>
         </div>
-        <div className="bg-white p-6 rounded-lg shadow">
-          <h2 className="text-xl font-semibold mb-4">Quick Actions</h2>
+        <div className={`${colors.card} p-6 rounded-lg shadow`}>
+          <h2 className={`text-xl font-semibold mb-4 ${colors.text}`}>Quick Actions</h2>
           <div className="space-y-2">
             <a
               href="/content/news"

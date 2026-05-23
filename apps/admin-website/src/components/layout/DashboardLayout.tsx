@@ -2,6 +2,7 @@
 
 import { ReactNode, useState } from 'react'
 import { Sidebar } from './Sidebar'
+import { useThemeStore } from '@/store/themeStore'
 
 interface DashboardLayoutProps {
   children: ReactNode
@@ -9,9 +10,10 @@ interface DashboardLayoutProps {
 
 export function DashboardLayout({ children }: DashboardLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(true)
+  const { colors } = useThemeStore()
 
   return (
-    <div className="min-h-screen bg-gray-100">
+    <div className={`min-h-screen ${colors.background}`}>
       <Sidebar 
         isOpen={sidebarOpen} 
         onClose={() => setSidebarOpen(false)}

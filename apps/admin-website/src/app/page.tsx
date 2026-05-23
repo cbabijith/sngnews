@@ -23,7 +23,7 @@ export default async function Home() {
     <DashboardLayout>
       <div className="flex justify-between items-center mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Welcome back, {user?.email?.split('@')[0]}</h1>
+          <h1 className="text-2xl font-bold text-black">Welcome back, {user?.email?.split('@')[0]}</h1>
         </div>
         <form action="/auth/signout" method="post">
           <button

@@ -5,8 +5,10 @@ import { newsService, categoryService } from '@/services'
 import { supabaseApi } from '@/api/supabase.api'
 import { News, Category } from '@/types'
 import { DashboardLayout } from '@/components/layout/DashboardLayout'
+import { useThemeStore } from '@/store/themeStore'
 
 export default function NewsPage() {
+  const { colors } = useThemeStore()
   const [newsItems, setNewsItems] = useState<News[]>([])
   const [categories, setCategories] = useState<Category[]>([])
   const [loading, setLoading] = useState(true)
@@ -157,7 +159,7 @@ export default function NewsPage() {
   return (
     <DashboardLayout>
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-4xl font-bold">News Management</h1>
+        <h1 className={`text-4xl font-bold ${colors.text}`}>News Management</h1>
         <button
           onClick={() => {
             setShowForm(true)
@@ -179,17 +181,17 @@ export default function NewsPage() {
       </div>
 
       {showForm && (
-        <div className="bg-white p-6 rounded-lg shadow mb-8">
-          <h2 className="text-2xl font-semibold mb-4">
+        <div className={`${colors.card} p-6 rounded-lg shadow mb-8`}>
+          <h2 className={`text-2xl font-semibold mb-4 ${colors.text}`}>
             {editingNews ? 'Edit News' : 'Add New News'}
           </h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium mb-2">Category</label>
+              <label className={`block text-sm font-medium mb-2 ${colors.text}`}>Category</label>
               <select
                 value={formData.category_id}
                 onChange={(e) => setFormData({ ...formData, category_id: e.target.value })}
-                className="w-full p-3 border rounded-lg"
+                className={`w-full p-3 ${colors.border} rounded-lg ${colors.text}`}
               >
                 <option value="">Select a category</option>
                 {categories.map((cat) => (
@@ -198,46 +200,46 @@ export default function NewsPage() {
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">Title</label>
+              <label className={`block text-sm font-medium mb-2 ${colors.text}`}>Title</label>
               <input
                 type="text"
                 value={formData.title}
                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                 required
-                className="w-full p-3 border rounded-lg"
+                className={`w-full p-3 ${colors.border} rounded-lg ${colors.text}`}
                 placeholder="News title"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">Description</label>
+              <label className={`block text-sm font-medium mb-2 ${colors.text}`}>Description</label>
               <textarea
                 value={formData.description}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                className="w-full p-3 border rounded-lg"
+                className={`w-full p-3 ${colors.border} rounded-lg ${colors.text}`}
                 rows={3}
                 placeholder="Short description"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">Content</label>
+              <label className={`block text-sm font-medium mb-2 ${colors.text}`}>Content</label>
               <textarea
                 value={formData.content}
                 onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                className="w-full p-3 border rounded-lg"
+                className={`w-full p-3 ${colors.border} rounded-lg ${colors.text}`}
                 rows={10}
                 placeholder="Full article content"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">Image</label>
+              <label className={`block text-sm font-medium mb-2 ${colors.text}`}>Image</label>
               <input
                 type="file"
                 accept="image/*"
                 onChange={handleImageUpload}
-                className="w-full p-3 border rounded-lg"
+                className={`w-full p-3 ${colors.border} rounded-lg ${colors.text}`}
                 disabled={uploading}
               />
-              {uploading && <p className="text-sm text-gray-500 mt-1">Uploading...</p>}
+              {uploading && <p className={`text-sm ${colors.textSecondary} mt-1`}>Uploading...</p>}
               {formData.image_url && (
                 <img
                   src={formData.image_url}
@@ -247,12 +249,12 @@ export default function NewsPage() {
               )}
             </div>
             <div>
-              <label className="block text-sm font-medium mb-2">YouTube Link</label>
+              <label className={`block text-sm font-medium mb-2 ${colors.text}`}>YouTube Link</label>
               <input
                 type="url"
                 value={formData.youtube_link}
                 onChange={(e) => setFormData({ ...formData, youtube_link: e.target.value })}
-                className="w-full p-3 border rounded-lg"
+                className={`w-full p-3 ${colors.border} rounded-lg ${colors.text}`}
                 placeholder="https://youtube.com/watch?v=..."
               />
             </div>
@@ -264,7 +266,7 @@ export default function NewsPage() {
                 onChange={(e) => setFormData({ ...formData, is_published: e.target.checked })}
                 className="w-4 h-4"
               />
-              <label htmlFor="is_published" className="text-sm font-medium">
+              <label htmlFor="is_published" className={`text-sm font-medium ${colors.text}`}>
                 Publish immediately
               </label>
             </div>
@@ -302,10 +304,10 @@ export default function NewsPage() {
 
       <div className="grid gap-4">
         {newsItems.length === 0 ? (
-          <p className="text-gray-500">No news items found</p>
+          <p className={colors.textSecondary}>No news items found</p>
         ) : (
           newsItems.map((item) => (
-            <div key={item.id} className="bg-white p-6 rounded-lg shadow">
+            <div key={item.id} className={`${colors.card} p-6 rounded-lg shadow`}>
               <div className="flex justify-between items-start">
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-2">
@@ -315,14 +317,14 @@ export default function NewsPage() {
                       {item.is_published ? 'Published' : 'Draft'}
                     </span>
                     {item.published_at && (
-                      <span className="text-sm text-gray-500">
+                      <span className={`text-sm ${colors.textSecondary}`}>
                         {new Date(item.published_at).toLocaleDateString()}
                       </span>
                     )}
                   </div>
-                  <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                  <h3 className={`text-xl font-semibold mb-2 ${colors.text}`}>{item.title}</h3>
                   {item.description && (
-                    <p className="text-gray-600 mb-2">{item.description}</p>
+                    <p className={`${colors.textSecondary} mb-2`}>{item.description}</p>
                   )}
                   {item.image_url && (
                     <img
