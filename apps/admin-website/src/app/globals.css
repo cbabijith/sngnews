@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+  --primary-color: #FFEF91;
+  --button-color: #FFA02E;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+  .bg-primary {
+    background-color: var(--primary-color);
+  }
+  .bg-button {
+    background-color: var(--button-color);
+  }
+  .text-primary {
+    color: var(--primary-color);
+  }
+  .text-button {
+    color: var(--button-color);
+  }
+  .border-primary {
+    border-color: var(--primary-color);
+  }
+  .border-button {
+    border-color: var(--button-color);
+  }
+}

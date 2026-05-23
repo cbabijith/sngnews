@@ -1,0 +1,4 @@
+export { categoryRepository, CategoryRepository } from './category.repository'
+export { newsRepository, NewsRepository } from './news.repository'
+export { profileRepository, ProfileRepository } from './profile.repository'
+export { subcategoryRepository, SubcategoryRepository } from './subcategory.repository'
